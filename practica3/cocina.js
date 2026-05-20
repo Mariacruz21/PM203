@@ -31,15 +31,33 @@ const catalogo = [
 ];
 
 
+// FILTER()
 
 const productosBaratos = catalogo.filter(
     producto => producto.precio < 50
 );
 
+console.log(productosBaratos);
 
 
-productosBaratos.forEach(producto => {
+const bebidas = catalogo.filter(
+    producto => producto.categoria === "bebida"
+);
 
-    console.log(producto.nombre);
+console.log(bebidas);
 
-});
+
+const postres = catalogo.filter(
+    producto => producto.categoria === "postre"
+);
+
+console.log(postres);
+
+
+// FIND()
+
+const productoEncontrado = catalogo.find(
+    producto => producto.nombre === "Café"
+);
+
+console.log(productoEncontrado);
