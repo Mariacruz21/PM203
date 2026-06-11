@@ -11,20 +11,17 @@ export default function App() {
   return (
     <View style={styles.container}>
 
-      <Text>------------------ Coponente Nativo-----------------</Text>
+      <Perfil nombre="Maria Cruz Camargo Araujo" carrera="Ingeniería en Sistemas Computacionales" materia="Programación Móvil" cuatrimestre="9°" />
 
-      <Image source={require('./assets/wave.png')} />
+      <text>--------------------------------------------------------------------</text>
+      <text>--------------------------------------------------------------------</text>
 
-      <Text>Hola Mundo React Native</Text>
-
-      <Text>------------------ Coponentes Propio Simple-----------------</Text>
-      <Saludo> </Saludo>
-
-      <Text>------------------ Coponentes Propio Compuesto ------------------ </Text>
-      <Saludo2> </Saludo2>
-
-      <Text>------------------ Coponente Perfil-----------------</Text>
-      <Perfil> </Perfil>
+      <Perfil
+        nombre="MariCruz"
+        carrera="ICS"
+        materia="PM"
+        cuatrimestre="9°"
+      />
 
       <StatusBar style="auto" />
     </View>
