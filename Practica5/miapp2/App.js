@@ -13,8 +13,6 @@ export default function App() {
 
       <Perfil nombre="Maria Cruz Camargo Araujo" carrera="Ingeniería en Sistemas Computacionales" materia="Programación Móvil" cuatrimestre="9°" />
 
-      <text>--------------------------------------------------------------------</text>
-      <text>--------------------------------------------------------------------</text>
 
       <Perfil
         nombre="MariCruz"
