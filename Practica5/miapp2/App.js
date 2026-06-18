@@ -1,55 +1,24 @@
+//ZONA 1: Importaciones de componentes  y Archivos 
 import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, View } from 'react-native';
-import { Perfil } from './Components/Perfil';
+import { StyleSheet, Text, View, Image } from 'react-native';
+import MenuScreen from './screens/MenuScreen';
 
+
+//ZONA 2: Main -  Hogar de los componentes 
 export default function App() {
   return (
-    <View style={styles.container}>
-
-      <Perfil
-        estiloExt={styles.tarjetaRoja}
-        nombre="Maria Cruz Camargo Araujo"
-        carrera="Ingeniería en Sistemas Computacionales"
-        materia="Programación Móvil"
-        cuatrimestre="9°"
-      />
-
-      <Perfil
-        estiloExt={styles.tarjetaVerde}
-        nombre="MariCruz"
-        carrera="ICS"
-        materia="PM"
-        cuatrimestre="9°"
-      />
-
-      <Perfil
-        estiloExt={styles.tarjetaRoja}
-        nombre="Maria Cruz Camargo Araujo"
-        carrera="Ingeniería en Sistemas Computacionales"
-        materia="Programación Móvil"
-        cuatrimestre="9°"
-      />
-
-      <StatusBar style="auto" />
-    </View>
+    <MenuScreen> </MenuScreen>
   );
 }
 
+//ZONA 3: Estilos y Posicionamiento 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: '#fff',
     alignItems: 'center',
-    justifyContent: 'space-evenly',
-    flexDirection: 'row',
+    justifyContent: 'center',
+    flexDirection: 'column',
   },
 
-
-  tarjetaRoja: {
-    backgroundColor: 'red',
-  },
-
-  tarjetaVerde: {
-    backgroundColor: 'green',
-  },
 });
