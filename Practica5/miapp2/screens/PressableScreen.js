@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { StyleSheet, Text, View, Switch, Pressable, Alert } from 'react-native';
 
-export default function App() {
+export default function PressableScreen() {
     const [isDarkMode, setIsDarkMode] = useState(false);
 
     const toggleSwitch = () => setIsDarkMode(previousState => !previousState);
@@ -35,7 +35,7 @@ export default function App() {
 
                 style={({ pressed }) => [
                     styles.button,
-                    { backgroundColor: pressed ? '#0056b3' : '#007BFF' } // Prop / Estilo dinámico si se presiona
+                    { backgroundColor: pressed ? '#0056b3' : '#007BFF' }
                 ]}
             >
                 <Text style={styles.buttonText}>Guardar Cambios</Text>
