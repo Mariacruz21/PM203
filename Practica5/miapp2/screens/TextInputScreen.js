@@ -1,147 +1,189 @@
-import { StatusBar } from "expo-status-bar";
-import { useState } from "react";
-import {
-    View,
-    ScrollView,
-    Text,
-    TextInput,
-    Alert,
-    Button,
-    StyleSheet,
-    Platform,
-} from "react-native";
+import React, { useState } from 'react';
+import { StatusBar } from 'expo-status-bar';
+import { StyleSheet, Text, View, TextInput, Switch, TouchableOpacity, Alert, ScrollView } from 'react-native';
 
-if (Platform.OS === "web") {
-    Alert.alert = (titular, mensaje, boton) => {
-        const list = Array.isArray(mensaje) ? mensaje : boton;
-        if (list) {
-            if (window.confirm(titular)) list.find((b) => b.onPress)?.onPress();
-        } else {
-            window.alert(titular + (mensaje ? "\n" + mensaje : ""));
-        }
-    };
-}
+export default function RegistroEventoUniversitario() {
 
-export default function TextInputScreen() {
-    const [nombre, setNombre] = useState();
-    const [correo, setCorreo] = useState();
-    const [contraseña, setContraseña] = useState();
-    const [numero, setNumero] = useState();
-    const [bio, setBio] = useState();
+    const [nombre, setNombre] = useState('');
+    const [carrera, setCarrera] = useState('');
+    const [semestre, setSemestre] = useState('');
 
-    const registro = () => {
-        if (!nombre || !correo || !contraseña || !numero) {
-            Alert.alert("Faltan datos", "Completa tos slos campos");
+    const [taller, setTaller] = useState(false);
+    const [constancia, setConstancia] = useState(false);
+    const [deportes, setDeportes] = useState(false);
+
+    const enviarRegistro = () => {
+
+        if (
+            nombre.trim() === '' ||
+            carrera.trim() === '' ||
+            semestre.trim() === ''
+        ) {
+            Alert.alert(
+                'Campos incompletos',
+                'Debes llenar todos los campos.'
+            );
             return;
         }
 
-        if (!correo.includes("@") || !correo.includes(".com")) {
-            Alert.alert("Correo invalido", "El correo debe contener @ y .com");
+        if (isNaN(semestre)) {
+            Alert.alert(
+                'Error',
+                'El semestre debe ser un número.'
+            );
             return;
         }
 
-        if (contraseña.length < 6) {
-            Alert.alert("Contraseña invalida", "Minimo 6 caracteres");
-            return;
-        }
+        Alert.alert(
+            'Registro enviado',
+            `Nombre: ${nombre}
+Carrera: ${carrera}
+Semestre: ${semestre}
 
-        if (!numero.match(/^[0-9+ ]+$/)) {
-            Alert.alert("Numero invalido", "El numero debe contener solo numeros");
-            setNumero("");
-            return;
-        }
-
-        Alert.alert(`Registrar ${nombre}`, [
-            {
-                text: "No",
-                style: "calcel",
-            },
-            {
-                text: "Si",
-                onPress: () => {
-                    Alert.alert("Exito", `Usuario registrado con exito`);
-                },
-            },
-        ]);
+Taller: ${taller ? 'Sí' : 'No'}
+Constancia: ${constancia ? 'Sí' : 'No'}
+Deportes: ${deportes ? 'Sí' : 'No'}`
+        );
     };
 
     return (
         <ScrollView contentContainerStyle={styles.container}>
-            <View style={styles.input}>
-                <Text style={styles.Titulo}>Formulario de registro de usuario</Text>
-                <TextInput
-                    style={styles.input}
-                    placeholder="Ingrese su nombre"
-                    placeholderTextColor="black"
-                    autoCapitalize="words"
-                    value={nombre}
-                    onChangeText={(texto) => setNombre(texto)}
-                />
-                <TextInput
-                    style={styles.input}
-                    placeholder="Ingrese tu correo electronico"
-                    placeholderTextColor="black"
-                    keyboardType="email-address"
-                    autoCapitalize="none"
-                    value={correo}
-                    onChangeText={(texto) => setCorreo(texto)}
-                />
-                <TextInput
-                    style={styles.input}
-                    placeholder="Ingrese tu contraseña minimo 6 caracteres"
-                    placeholderTextColor="black"
-                    secureTextEntry={true}
-                    value={contraseña}
-                    onChangeText={(texto) => setContraseña(texto)}
-                />
-                <TextInput
-                    style={styles.input}
-                    placeholder="ingresa tu numero de telefono "
-                    placeholderTextColor="black"
-                    keyboardType="number-pad"
-                    maxLength={12}
-                    value={numero}
-                    onChangeText={(texto) => setNumero(texto)}
-                />
-                <TextInput
-                    style={styles.input}
-                    placeholder="Sobre ti (Opcional)"
-                    placeholderTextColor="black"
-                    multiline={true}
-                    maxLength={20}
-                    value={bio}
-                    onChangeText={(texto) => setBio(texto)}
-                />
 
-                <Button title="Registrar" onPress={registro} color="red" />
+            <StatusBar style="auto" />
 
-                <StatusBar style="auto" />
+            <Text style={styles.titulo}>
+                Registro de Evento Universitario
+            </Text>
+
+            <TextInput
+                style={styles.input}
+                placeholder="Nombre completo"
+                value={nombre}
+                onChangeText={setNombre}
+            />
+
+            <TextInput
+                style={styles.input}
+                placeholder="Carrera"
+                value={carrera}
+                onChangeText={setCarrera}
+            />
+
+            <TextInput
+                style={styles.input}
+                placeholder="Semestre"
+                keyboardType="numeric"
+                value={semestre}
+                onChangeText={setSemestre}
+            />
+
+            <Text style={styles.subtitulo}>
+                Opciones
+            </Text>
+
+            <View style={styles.fila}>
+                <Text style={styles.texto}>
+                    ¿Asistirá al taller?
+                </Text>
+
+                <Switch
+                    value={taller}
+                    onValueChange={setTaller}
+                />
             </View>
+
+            <View style={styles.fila}>
+                <Text style={styles.texto}>
+                    ¿Requiere constancia?
+                </Text>
+
+                <Switch
+                    value={constancia}
+                    onValueChange={setConstancia}
+                />
+            </View>
+
+            <View style={styles.fila}>
+                <Text style={styles.texto}>
+                    ¿Participará en actividades deportivas?
+                </Text>
+
+                <Switch
+                    value={deportes}
+                    onValueChange={setDeportes}
+                />
+            </View>
+
+            <TouchableOpacity
+                style={styles.boton}
+                onPress={enviarRegistro}
+            >
+                <Text style={styles.textoBoton}>
+                    Enviar Registro
+                </Text>
+            </TouchableOpacity>
+
         </ScrollView>
     );
 }
 
 const styles = StyleSheet.create({
+
     container: {
         flexGrow: 1,
-        backgroundColor: "z#fff",
-        alignItems: "center",
-        justifyContent: "center",
-        flexDirection: "column",
-        padding: 24,
-        gap: 12,
+        backgroundColor: '#fff',
+        padding: 25,
+        justifyContent: 'center'
     },
-    Titulo: {
-        padding: 30,
-        fontSize: 20,
-        alignContent: "stretch",
+
+    titulo: {
+        fontSize: 30,
+        fontWeight: 'bold',
+        textAlign: 'center',
+        marginBottom: 30
     },
+
     input: {
-        borderWidth: 3,
-        borderColor: "#e6e6e6",
-        borderRadius: 3,
-        padding: 10,
-        fontSize: 15,
-        backgroundColor: "#ffffff",
+        borderWidth: 1,
+        borderColor: '#ccc',
+        borderRadius: 10,
+        padding: 12,
+        marginBottom: 18,
+        fontSize: 17
     },
+
+    subtitulo: {
+        fontSize: 24,
+        fontWeight: 'bold',
+        marginTop: 15,
+        marginBottom: 15
+    },
+
+    fila: {
+        flexDirection: 'row',
+        justifyContent: 'space-between',
+        alignItems: 'center',
+        marginVertical: 10
+    },
+
+    texto: {
+        fontSize: 18,
+        flex: 1,
+        marginRight: 10
+    },
+
+    boton: {
+        backgroundColor: '#007BFF',
+        padding: 15,
+        borderRadius: 10,
+        marginTop: 30
+    },
+
+    textoBoton: {
+        color: '#fff',
+        textAlign: 'center',
+        fontSize: 18,
+        fontWeight: 'bold'
+    }
+
 });
