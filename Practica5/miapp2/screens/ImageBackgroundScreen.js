@@ -1,9 +1,8 @@
-/* Zona 1: Importanciones de componentes y archivos */
 import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, Text, View, ImageBackground, Button, Image } from 'react-native';
 import React, { useState, useEffect } from 'react';
 
-/* Zona 2: Main - Hogar de los componentes */
+
 export default function ImageBackgroundScreen() {
     const [fondo, setFondo] = useState(
         require('../assets/fondo.jpeg'));
@@ -47,7 +46,6 @@ export default function ImageBackgroundScreen() {
     );
 }
 
-/* Zona3: Estilos y Posicionamiento */
 const styles = StyleSheet.create({
     fondo: {
         flex: 1,
